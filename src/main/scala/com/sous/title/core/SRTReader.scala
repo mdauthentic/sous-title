@@ -5,14 +5,17 @@ import java.nio.file.{Files, Paths}
 import com.sous.title.core.StringFormatter._
 
 import scala.util.Using
-import scala.jdk.CollectionConverters._
-
 
 class SRTReader(val charLength: Int = 3) extends Utils {
 
-  private def lineReader(file: String): List[String] = {
+  /**
+   * Read [[SRT]] files from file
+   *
+   * @param filePath: file path
+   * */
+  private def lineReader(filePath: String): List[String] = {
     try {
-      val bufferedReader = Files.newBufferedReader(Paths.get(file))
+      val bufferedReader = Files.newBufferedReader(Paths.get(filePath))
       Using.resource(bufferedReader) { reader =>
         val lines = Iterator.unfold(())(_ => Option(reader.readLine()).map(_ -> ()))
         var linePrefix = ""
@@ -31,27 +34,9 @@ class SRTReader(val charLength: Int = 3) extends Utils {
     }
   } // End lineReader
 
-
-  private def lineReader2(file: String): List[String] = {
-    var linePrefix = ""
-    try {
-      val lines = Files.readAllLines(Paths.get(file)).asScala.toList
-      lines.foreach(nextLine => {
-        if (nextLine.trim.isEmpty) {
-          linePrefix += "\n"
-        } else {
-          linePrefix += nextLine + setStarDelim(charLength)
-        }
-      })
-
-      val result = linePrefix.split("\n{2,}")
-        .map(_.split("\n").toList).toList
-      result.flatten
-    } catch {
-      case e: Exception => throw new Exception(e.getMessage)
-    }
-  } // End lineReader2
-
+  /**
+   * Convert list of `.srt` strings to [[SRT]] type
+   * */
   private def convert2Type(xs: List[String]): List[SRT] = {
 
     xs.filterNot(_.isEmpty).map(string => {

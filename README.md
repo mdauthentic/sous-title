@@ -6,7 +6,8 @@ Read and convert `.srt` file to `csv`
 
 
 ```scala
-import com.sous.title.core._
+import com.sous.title.core.SRTReader // for reading file
+import com.sous.title.core.SRTWriter.SRT2CSV // for reading and writing to csv
 ```
 ### Reading example
 ```
@@ -39,8 +40,8 @@ scala> val inlineReader = new SRTReader().reader(srt)
 
 ### Writing example
 ```
-scala> SRTWriter.SRT2CSV("input.srt", "output.csv")
+scala> SRT2CSV("input.srt", "output.csv")
 ```
 
-### Background story
-In `Scandal` (a TV series), `wine` was mentioned several times and I was curious to know the number of times the word was used in the entire series (from season 1 - 7).
+### Motivation
+In `Scandal` (a TV series), `wine` was mentioned several times and I was curious to know the number of times the word was used in the entire series (from seasons 1 - 7).

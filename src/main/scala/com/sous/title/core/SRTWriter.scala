@@ -34,7 +34,7 @@ object SRTWriter {
    *
    * @param source: a list of converted [[SRT]] strings
    * */
-  def SRT2CSV(source: List[SRT]): List[String] = source.map(e => e.toCSV + "\n")
+  def SRT2CSV(source: List[SRT]): List[String] = source.map(e => e.toCSV.dropRight(1) + "\n")
 
   /**
    * Convert [[SRT]] files to `CSV`
