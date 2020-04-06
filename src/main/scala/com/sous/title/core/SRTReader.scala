@@ -54,8 +54,9 @@ class SRTReader(val charLength: Int = 3) extends Utils {
 
       val id = resultArray.head.toInt
       val time = cleanSubTime(resultArray(1))
+      val (startTime, endTime) = (time.head, time.last)
 
-      SRT(id, time, sub2List)
+      SRT(id, startTime, endTime, sub2List)
     })
   } // End SrtType
 

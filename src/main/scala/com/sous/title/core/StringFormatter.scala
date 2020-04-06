@@ -19,5 +19,19 @@ object StringFormatter {
    * Removes `,` from time and replace them with single `.`
    * @param string: string to clean
    * */
-  def cleanSubTime(string: String): String = string.replaceAll(",", ".")
+  def cleanSubTime(string: String): Array[String] = {
+    val removeSep = string.replaceAll(",", ".")
+    removeSep.split("-->").map(_.trim)
+  }
+
+  /**
+   * Convert list containing user-defined headers to `String`
+   *
+   * @param header: file header list
+   * @return comma-separated string
+   * */
+  def fileHeader(header: List[String]): String = {
+    if (header.size < 4) throw new Exception("File header size cannot be less than 4.")
+    else header.mkString(",")
+  }
 }

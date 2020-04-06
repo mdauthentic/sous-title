@@ -3,6 +3,7 @@ package com.sous.title.core
 import java.nio.file.{Files, Paths, StandardOpenOption}
 
 import com.sous.title.core.CSVConverter._
+import com.sous.title.core.StringFormatter.fileHeader
 
 object SRTWriter {
 
@@ -44,6 +45,22 @@ object SRTWriter {
    * @return                `CSV` file
    * */
   def SRT2CSV(sourceFile: String, outputFileName: String): Unit = {
+    new SRTReader().open(sourceFile).foreach(e => writeSRT(outputFileName, e.toCSV.dropRight(1) + "\n"))
+    println("File converted and written to CSV.")
+  }
+
+  /**
+   * Convert [[SRT]] files to `CSV`
+   *
+   * @param sourceFile:     source file name
+   * @param outputFileName: output file path
+   * @param header:         file header list
+   * @return                `CSV` file
+   * */
+  def SRT2CSV(sourceFile: String, outputFileName: String, header: List[String]): Unit = {
+    // write file header
+    writeSRT(outputFileName, fileHeader(header) + "\n")
+    // write all
     new SRTReader().open(sourceFile).foreach(e => writeSRT(outputFileName, e.toCSV.dropRight(1) + "\n"))
     println("File converted and written to CSV.")
   }
