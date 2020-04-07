@@ -42,8 +42,14 @@ scala> val inlineReader = new SRTReader().reader(srt)
 ```
 
 ### Writing example
+There are two ways to write to file;
+- writing without header
 ```
 scala> SRT2CSV("input.srt", "output.csv")
+```
+- with user-defined header
+```
+scala> SRT2CSV("input.srt", "output.csv", List("id", "start_time", "end_time", "subtitle"))
 ```
 
 ## Motivation
