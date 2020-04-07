@@ -45,3 +45,6 @@ scala> SRT2CSV("input.srt", "output.csv")
 
 ### Motivation
 In `Scandal` (a TV series), `wine` was mentioned several times and I was curious to know the number of times the word was used in the entire series (from seasons 1 - 7).
+
+### License
+[Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
