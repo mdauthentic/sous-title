@@ -1,11 +1,11 @@
 # Sous-title
-
-`SRT` to `CSV` converter
-
-Read and convert `.srt` file to `csv`
+[![Build Status](https://travis-ci.org/mdauthentic/sous-title.svg?branch=master)](https://travis-ci.org/mdauthentic/sous-title)
 
 
-## Examples
+Read and convert `.srt` file to `csv` or `List`
+
+
+## Getting started
 
 ### Import
 ```scala
