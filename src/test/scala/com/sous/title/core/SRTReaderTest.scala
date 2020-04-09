@@ -18,14 +18,14 @@ class SRTReaderTest extends FunSpec with BeforeAndAfter {
   describe("file reader") {
 
     it("should accept valid file path") {
-      val path = Paths.get("resources/data.srt")
+      val path = Paths.get(getClass.getClassLoader.getResource(filePath).getFile)
       val file = Files.exists(path)
       file should be (true)
     }
 
     it("should return non-empty list") {
       val line = PrivateMethod[List[String]](Symbol("lineReader"))
-      val r = reader invokePrivate line(filePath)
+      val r = reader invokePrivate line(getClass.getClassLoader.getResource(filePath).getFile)
       r.length should be > 0
     }
 
