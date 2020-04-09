@@ -1,26 +1,54 @@
 package com.sous.title.core
 
-import scala.util.parsing.combinator.RegexParsers
+import com.sous.title.core.StringFormatter._
 
 
 /**
- * Parse `.srt` strings format to list
+ * Parse `srt` strings format to list
  * */
-object Parser extends RegexParsers {
+object Parser {
 
-  private val EOI = """\z""".r // end of input
-  private val EOL = sys.props("line.separator")
-  private val separator = EOI | EOL
-  private val word = """\w+""".r
+  /**
+   * Parse multiline `srt` string
+   *
+   * @param string: multiline srt string
+   * */
+  def parse(string: String): List[SRT] = {
 
-  override val skipWhitespace = false
+    /**
+     * Split multiline strings
+     * */
+    def multiLineParser(string: String): Array[Array[String]] = {
+      // split string by empty line
+      val multiline = string.split("\n\n")
+      // split each list to individual parts
+      multiline.map(e => e.split("\n"))
+    }
 
-  val list: Parser[List[String]] = rep(word <~ separator)
+    /**
+     * Convert strings to [[SRT]] type
+     * */
+    def convertToSRT(string: String): List[SRT] = {
+      multiLineParser(string).map(array => {
+        val subtitle2List =
+          if (array.length > 3) {
+            val resultCopy = array.map(identity)
+            val result = resultCopy.patch(0, Nil, 2).toList
+            result.map(elem => cleanString(elem))
+          } else {
+            List(cleanString(array(2)))
+          }
 
-  val lists: Parser[List[List[String]]] = repsep(list, rep1(EOL))
+        val id = array.head.toInt
+        val time = cleanSubTime(array(1))
+        val (startTime, endTime) = (time.head, time.last)
 
-  def parse(s: String): List[List[String]] = parseAll(lists, s) match {
-    case Success(res, _) => res
-    case _ => List[List[String]]()
+        SRT(id, startTime, endTime, subtitle2List)
+      }).toList
+    }
+    // return results
+    convertToSRT(string)
+
   }
+
 }

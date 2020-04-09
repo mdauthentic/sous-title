@@ -62,6 +62,6 @@ class SRTReader(val charLength: Int = 3) extends Utils {
 
   def open(file: String): List[SRT] = convert2Type(lineReader(file))
 
-  def reader(string: String): List[List[String]] = Parser.parse(string)
+  def reader(string: String): List[SRT] = Parser.parse(string)
 
 }

@@ -31,7 +31,7 @@ object StringFormatter {
    * @return comma-separated string
    * */
   def fileHeader(header: List[String]): String = {
-    if (header.size < 4) throw new Exception("File header size cannot be less than 4.")
-    else header.mkString(",")
+    if (header.size == 4) header.mkString(",")
+    else throw new Exception("File header size cannot be less/greater than 4.")
   }
 }

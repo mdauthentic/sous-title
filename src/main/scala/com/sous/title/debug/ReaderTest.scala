@@ -29,6 +29,7 @@ object ReaderTest {
         |(Disparo)""".stripMargin
 
     val inlineReader = new SRTReader().reader(srt)
+    println(inlineReader)
 
   }
 
