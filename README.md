@@ -15,11 +15,11 @@ import com.sous.title.core.SRTWriter.SRT2CSV // for reading and writing to csv
 ### Reading example
 ```
 scala> val reader = new SRTReader().open("file.srt")
-reader: List(SRT(1,00:00:33.599 --> 00:00:35.270,List((NARRA) "Soy Amelia Folch.)))
+reader: List(SRT(1, 00:00:33.599, 00:00:35.270, List(Soy Amelia Folch.)))
 
 ```
 ### Inline reader example
-Inline reader returns a list containing each segment of the `.srt` file
+Inline reader returns a list of `.srt` type
 
 ```
 scala> val srt =
@@ -30,15 +30,12 @@ scala> val srt =
         |2
         |00:00:36,199 --> 00:00:39,870
         |Tengo 23 años y sin embargo
-        |he salvado la vida del Empecinado.
-        |
-        |3
-        |00:00:45,160 --> 00:00:46,550
-        |(Disparo)""".stripMargin
+        |he salvado la vida del Empecinado.""".stripMargin
 ```
 
 ```scala>
 scala> val inlineReader = new SRTReader().reader(srt)
+inlineReader: List(SRT(1,00:00:33.599,00:00:35.270,List((NARRA) "Soy Amelia Folch.)), SRT(2,00:00:36.199,00:00:39.870,List(Tengo 23 años y sin embargo, he salvado la vida del Empecinado.)))
 ```
 
 ### Writing example
