@@ -1,9 +1,9 @@
-package com.sous.title.core
+package io.github.mdauthentic.core
 
 import java.nio.file.{Files, Paths, StandardOpenOption}
 
-import com.sous.title.core.CSVConverter._
-import com.sous.title.core.StringFormatter.fileHeader
+import CSVConverter._
+import StringFormatter.fileHeader
 
 object SRTWriter {
 

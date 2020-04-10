@@ -1,4 +1,4 @@
-package com.sous.title.core
+package io.github.mdauthentic.core
 
 import org.scalatest.{BeforeAndAfter, FunSpec}
 import org.scalatest.Matchers._

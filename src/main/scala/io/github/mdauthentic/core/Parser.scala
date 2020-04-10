@@ -1,6 +1,6 @@
-package com.sous.title.core
+package io.github.mdauthentic.core
 
-import com.sous.title.core.StringFormatter._
+import StringFormatter._
 
 
 /**

@@ -14,8 +14,9 @@ libraryDependencies += "io.github.mdauthentic" % "sous-title_2.13" % "0.1.0"
 
 ### Import
 ```scala
-import com.sous.title.core.SRTReader // for reading file
-import com.sous.title.core.SRTWriter.SRT2CSV // for reading and writing to csv
+// for reading file
+import io.github.mdauthentic.core.SRTReader
+import io.github.mdauthentic.core.SRTWriter.SRT2CSV // for reading and writing to csv
 ```
 ### Reading example
 ```

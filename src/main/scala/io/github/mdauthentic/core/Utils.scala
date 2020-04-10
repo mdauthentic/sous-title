@@ -1,4 +1,4 @@
-package com.sous.title.core
+package io.github.mdauthentic.core
 
 trait Utils {
 

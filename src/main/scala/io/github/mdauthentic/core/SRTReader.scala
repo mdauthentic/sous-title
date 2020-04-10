@@ -1,8 +1,8 @@
-package com.sous.title.core
+package io.github.mdauthentic.core
 
 import java.nio.file.{Files, Paths}
 
-import com.sous.title.core.StringFormatter._
+import StringFormatter._
 
 import scala.util.Using
 
