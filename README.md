@@ -19,7 +19,7 @@ import io.github.mdauthentic.core.SRTReader
 import io.github.mdauthentic.core.SRTWriter.SRT2CSV // for reading and writing to csv
 ```
 ### Reading example
-```
+```scala
 scala> val reader = new SRTReader().open("file.srt")
 reader: List(SRT(1, 00:00:33.599, 00:00:35.270, List(Soy Amelia Folch.)))
 
@@ -27,7 +27,7 @@ reader: List(SRT(1, 00:00:33.599, 00:00:35.270, List(Soy Amelia Folch.)))
 ### Inline reader example
 Inline reader returns a list of `.srt` type
 
-```
+```scala
 scala> val srt =
       """1
         |00:00:33,599 --> 00:00:35,270
@@ -39,7 +39,7 @@ scala> val srt =
         |he salvado la vida del Empecinado.""".stripMargin
 ```
 
-```scala>
+```scala
 scala> val inlineReader = new SRTReader().reader(srt)
 inlineReader: List(SRT(1,00:00:33.599,00:00:35.270,List((NARRA) "Soy Amelia Folch.)), SRT(2,00:00:36.199,00:00:39.870,List(Tengo 23 años y sin embargo, he salvado la vida del Empecinado.)))
 ```
@@ -47,11 +47,11 @@ inlineReader: List(SRT(1,00:00:33.599,00:00:35.270,List((NARRA) "Soy Amelia Folc
 ### Writing example
 There are two ways to write to file;
 - writing without header
-```
+```scala
 scala> SRT2CSV("input.srt", "output.csv")
 ```
 - with user-defined header
-```
+```scala
 scala> SRT2CSV("input.srt", "output.csv", List("id", "start_time", "end_time", "subtitle"))
 ```
 
