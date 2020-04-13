@@ -16,3 +16,12 @@ import xerial.sbt.Sonatype._
 sonatypeProjectHosting := Some(GitHubHosting("mdauthentic", "sous-title", "muideen.lawal20@gmail.com"))
 
 publishTo := sonatypePublishTo.value
+
+lazy val showVersion = taskKey[Unit]("Show version")
+showVersion := {
+  println(version.value)
+}
+
+pgpPublicRing := file("ci/pubring.asc")
+pgpSecretRing := file("ci/secring.asc")
+pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toArray)
