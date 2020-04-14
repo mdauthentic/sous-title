@@ -14,13 +14,11 @@ libraryDependencies += "io.github.mdauthentic" % "sous-title_2.13" % "0.2.0"
 
 ### Import
 ```scala
-// for reading file
-import io.github.mdauthentic.core.SRTReader
-import io.github.mdauthentic.core.SRTWriter.SRT2CSV // for reading and writing to csv
+import io.github.mdauthentic.core._
 ```
 ### Reading example
 ```scala
-scala> val reader = new SRTReader().open("file.srt")
+scala> val reader = SRTReader.open("file.srt")
 reader: List(SRT(1, 00:00:33.599, 00:00:35.270, List(Soy Amelia Folch.)))
 
 ```
@@ -40,7 +38,7 @@ scala> val srt =
 ```
 
 ```scala
-scala> val inlineReader = new SRTReader().reader(srt)
+scala> val inlineReader = SRTReader.readInLine(srt)
 inlineReader: List(SRT(1,00:00:33.599,00:00:35.270,List((NARRA) "Soy Amelia Folch.)), SRT(2,00:00:36.199,00:00:39.870,List(Tengo 23 años y sin embargo, he salvado la vida del Empecinado.)))
 ```
 
@@ -48,11 +46,18 @@ inlineReader: List(SRT(1,00:00:33.599,00:00:35.270,List((NARRA) "Soy Amelia Folc
 There are two ways to write to file;
 - writing without header
 ```scala
-scala> SRT2CSV("input.srt", "output.csv")
+scala> val reader = SRTReader.open("file.srt")
+reader: List(SRT(1, 00:00:33.599, 00:00:35.270, List(Soy Amelia Folch.)))
+
+scala> SRTWriter.write(reader, "output.csv")
+```
+using file path directly
+```scala
+scala> SRTWriter.write("inputFileName.srt", "outputFileName.csv")
 ```
 - with user-defined header
 ```scala
-scala> SRT2CSV("input.srt", "output.csv", List("id", "start_time", "end_time", "subtitle"))
+scala> SRTWriter.write("input.srt", "output.csv", List("id", "start_time", "end_time", "subtitle"))
 ```
 
 ## Motivation

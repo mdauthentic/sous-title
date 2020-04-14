@@ -2,13 +2,6 @@ package io.github.mdauthentic.core
 
 object StringFormatter {
 
-  def escapeString(string: String): String = {
-    val escapeChar = "\\\\"
-    var escapedString = ""
-    string.indices.foreach(i => escapedString += escapeChar + string(i))
-    escapedString
-  }
-
   /**
    * Removes `,` from string and replace them with single space
    * @param string: string to clean

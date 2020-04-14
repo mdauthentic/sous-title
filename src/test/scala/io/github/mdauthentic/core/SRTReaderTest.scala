@@ -32,10 +32,9 @@ class SRTReaderTest extends FunSpec with BeforeAndAfter {
     }*/
 
     it("should convert list of strings to typed list") {
-      val converter = PrivateMethod[List[SRT]](Symbol("convert2Type"))
       val list = List("1***00:00:33.599 --> 00:00:35.270***Soy Amelia Folch.")
       val expected = List(SRT(1, "00:00:33.599", "00:00:35.270", List("Soy Amelia Folch.")))
-      val typedSubtitle = reader invokePrivate converter(list)
+      val typedSubtitle = reader.convert2Type(list)
       typedSubtitle should equal(expected)
     }
 

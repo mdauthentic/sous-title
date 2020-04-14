@@ -5,8 +5,7 @@ import java.nio.file.{Files, Paths, StandardOpenOption}
 import CSVConverter._
 import StringFormatter.fileHeader
 
-object SRTWriter {
-
+class SRTWriter {
   /**
    * Write converted srt to file
    *
@@ -29,13 +28,30 @@ object SRTWriter {
     }
 
   } // End writeSRT
+}
+
+object SRTWriter {
+
+  private val writer = new SRTWriter
 
   /**
    * Convert [[SRT]] files to `CSV`
    *
    * @param source: a list of converted [[SRT]] strings
    * */
-  def SRT2CSV(source: List[SRT]): List[String] = source.map(e => e.toCSV.dropRight(1) + "\n")
+  def write(source: List[SRT]): List[String] = source.map(e => e.toCSV.dropRight(1) + "\n")
+
+  /**
+   * Convert [[SRT]] files to `CSV`
+   *
+   * @param source:         a list of converted [[SRT]] strings
+   * @param outputFileName: output file path
+   * @return                `CSV` file
+   * */
+  def write(source: List[SRT], outputFileName: String): Unit = {
+    source.foreach(e => writer.writeSRT(outputFileName, e.toCSV.dropRight(1) + "\n"))
+    println("File converted and written to CSV.")
+  }
 
   /**
    * Convert [[SRT]] files to `CSV`
@@ -44,9 +60,9 @@ object SRTWriter {
    * @param outputFileName: output file path
    * @return                `CSV` file
    * */
-  def SRT2CSV(sourceFile: String, outputFileName: String): Unit = {
-    new SRTReader().open(sourceFile).foreach(e => writeSRT(outputFileName, e.toCSV.dropRight(1) + "\n"))
-    println("File converted and written to CSV.")
+  def write(sourceFile: String, outputFileName: String): Unit = {
+    val reader = SRTReader.open(sourceFile)
+    write(reader, outputFileName)
   }
 
   /**
@@ -57,12 +73,13 @@ object SRTWriter {
    * @param header:         file header list
    * @return                `CSV` file
    * */
-  def SRT2CSV(sourceFile: String, outputFileName: String, header: List[String]): Unit = {
+  def write(sourceFile: String, outputFileName: String, header: List[String]): Unit = {
+    // read from file
+    val reader = SRTReader.open(sourceFile)
     // write file header
-    writeSRT(outputFileName, fileHeader(header) + "\n")
+    writer.writeSRT(outputFileName, fileHeader(header) + "\n")
     // write all
-    new SRTReader().open(sourceFile).foreach(e => writeSRT(outputFileName, e.toCSV.dropRight(1) + "\n"))
-    println("File converted and written to CSV.")
+    write(reader, outputFileName)
   }
 
 }

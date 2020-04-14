@@ -13,7 +13,7 @@ class SRTReader(val charLength: Int = 3) extends Utils {
    *
    * @param filePath: file path
    * */
-  private def lineReader(filePath: String): List[String] = {
+  def lineReader(filePath: String): List[String] = {
     try {
       val bufferedReader = Files.newBufferedReader(Paths.get(filePath))
       Using.resource(bufferedReader) { reader =>
@@ -37,7 +37,7 @@ class SRTReader(val charLength: Int = 3) extends Utils {
   /**
    * Convert list of `.srt` strings to [[SRT]] type
    * */
-  private def convert2Type(xs: List[String]): List[SRT] = {
+  def convert2Type(xs: List[String]): List[SRT] = {
 
     xs.filterNot(_.isEmpty).map(string => {
 
@@ -60,8 +60,27 @@ class SRTReader(val charLength: Int = 3) extends Utils {
     })
   } // End SrtType
 
-  def open(file: String): List[SRT] = convert2Type(lineReader(file))
+  /*def open(file: String): List[SRT] = convert2Type(lineReader(file))
 
-  def reader(string: String): List[SRT] = Parser.parse(string)
+  def reader(string: String): List[SRT] = Parser.parse(string)*/
 
+}
+
+object SRTReader {
+
+  private val read = new SRTReader()
+
+  /**
+   * Read [[SRT]] from file
+   *
+   * @param file: file path
+   * */
+  def open(file: String): List[SRT] = read.convert2Type(read.lineReader(file))
+
+  /**
+   * Read inline `.srt` string
+   *
+   * @param string: string in `.srt` format
+   * */
+  def readInLine(string: String): List[SRT] = Parser.parse(string)
 }
