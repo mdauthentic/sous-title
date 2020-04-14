@@ -7,7 +7,7 @@ Read and convert `.srt` file to `csv` or `List`
 
 ## build.sbt
 ```scala
-libraryDependencies += "io.github.mdauthentic" % "sous-title_2.13" % "0.2.0"
+libraryDependencies += "io.github.mdauthentic" % "sous-title_2.13" % "0.3.0"
 ```
 
 ## Getting started
