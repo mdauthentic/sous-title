@@ -26,6 +26,7 @@ scala> val reader = SRTReader.open("file.srt")
 reader: List(SRT(1, 00:00:33.599, 00:00:35.270, List(Soy Amelia Folch.)))
 
 ```
+
 ### Inline reader example
 Inline reader returns a list of `.srt` type
 
@@ -56,7 +57,9 @@ List(List((NARRA) Soy Amelia Folch.), List(Tengo 23 años y sin embargo, he salv
 
 ### Writing example
 There are two ways to write to file;
+
 - writing without header
+
 ```scala
 scala> val reader = SRTReader.open("file.srt")
 reader: List[SRT] = List(SRT(1, 00:00:33.599, 00:00:35.270, List(Soy Amelia Folch.)))
@@ -77,7 +80,9 @@ scala> SRTWriter.write("inputFileName.srt", "outputFileName.csv")
 ```scala
 scala> val header = List("id", "start_time", "end_time", "subtitle")
 header: List[String] = List(id, start_time, end_time, subtitle)
+```
 
+```
 scala> SRTWriter.write("input.srt", "output.csv", header)
 ```
 
