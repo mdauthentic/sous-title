@@ -71,7 +71,9 @@ using file path directly
 ```scala
 scala> SRTWriter.write("inputFileName.srt", "outputFileName.csv")
 ```
+
 - with user-defined header
+
 ```scala
 scala> val header = List("id", "start_time", "end_time", "subtitle")
 header: List[String] = List(id, start_time, end_time, subtitle)
