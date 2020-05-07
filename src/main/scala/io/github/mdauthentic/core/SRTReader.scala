@@ -62,7 +62,7 @@ class SRTReader(val charLength: Int = 3) extends Utils {
 
 }
 
-object SRTReader {
+object SRTReader extends Utils {
 
   private val read = new SRTReader()
 
@@ -71,7 +71,13 @@ object SRTReader {
    *
    * @param file: file path
    * */
-  def open(file: String): List[SRT] = read.convert2Type(read.lineReader(file))
+  def open(file: String): List[SRT] = {
+    if (getFileExtension(file).nonEmpty || getFileExtension(file).get == "srt") {
+      read.convert2Type(read.lineReader(file))
+    } else {
+      throw new Exception("Invalid file format")
+    }
+  }
 
   /**
    * Read inline `.srt` string
