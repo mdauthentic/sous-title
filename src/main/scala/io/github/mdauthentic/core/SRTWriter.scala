@@ -5,6 +5,8 @@ import java.nio.file.{Files, Paths, StandardOpenOption}
 import CSVConverter._
 import StringFormatter.fileHeader
 
+import scala.util.{Failure, Success, Try}
+
 class SRTWriter {
   /**
    * Write converted srt to file
@@ -13,8 +15,8 @@ class SRTWriter {
    * @param data: text to write to file
    * */
   def writeSRT(file: String, data: String): Unit = {
-    val path = Paths.get(file)
     try {
+      val path = Paths.get(file)
       if (Files.notExists(path)) {
         Files.createDirectories(path.getParent)
         Files.createFile(path)
@@ -49,8 +51,11 @@ object SRTWriter {
    * @return                `CSV` file
    * */
   def write(source: List[SRT], outputFileName: String): Unit = {
-    source.foreach(e => writer.writeSRT(outputFileName, e.toCSV.dropRight(1) + "\n"))
-    println("File converted and written to CSV.")
+    val writeToFile = Try{ source.foreach(e => writer.writeSRT(outputFileName, e.toCSV.dropRight(1) + "\n")) }
+    writeToFile match {
+      case Success(_) => println("File converted and written to CSV.")
+      case Failure(e) => e.printStackTrace()
+    }
   }
 
   /**
